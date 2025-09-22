@@ -1,0 +1,19 @@
+.search-bar {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.search-bar input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 200px;
+  transition: width 0.3s ease;
+}
+
+.search-bar input:focus {
+  outline: none;
+  width: 250px;
+  
+}

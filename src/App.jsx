@@ -9,6 +9,7 @@ const API_URL = "https://restcountries.com/v3.1/all?fields=name,cca2,capital,reg
 
 function App() {
 const [countries, setCountries] = useState([]);
+const [searchTerm, setSearchTerm] = useState("");
  useEffect(() => {
    fetchCountries()
  }, []);
@@ -25,10 +26,16 @@ const fetchCountries = async () => {
      }
    }
 
+
+  const filterCountries = countries.filter(country => {
+    return country.name.common.toLowerCase().includes(searchTerm.toLowerCase());
+  });
+  console.log(filterCountries);
+
   return (
       <div className="App">
-        <SearchBar />
-        <CountryList countries={countries} />
+        <SearchBar setSearchTerm={setSearchTerm} />
+        <CountryList countries={filterCountries} />
       </div>
   )
 }
