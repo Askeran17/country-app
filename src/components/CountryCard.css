@@ -1,0 +1,67 @@
+.country-card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 15px;
+  width: 250px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  overflow: hidden;
+  margin: 10px;
+  position: relative;
+  transform: translateY(20px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+  opacity: 0;
+  animation: slideIn 0.5s forwards;
+}
+
+.country-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.flag {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.country-card:hover .flag {
+  transform: scale(1.05);
+  cursor: pointer;
+  
+}
+
+.country-info {
+  margin-top: 10px;
+}
+
+.country-info h2 {
+  font-size: 1.5em;
+  margin: 10px 0;
+  color: #333;
+  transition: color 0.3s ease;
+}
+
+.country-info p {
+  margin: 5px 0;
+  color: #555;
+  font-size: 0.9em;
+}
+
+.country-info strong {
+  color: #333;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}

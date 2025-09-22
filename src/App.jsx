@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import CountryList from './components/CountryList.jsx'
+import SearchBar from './components/SearchBar.jsx'
 
 const API_URL = "https://restcountries.com/v3.1/all?fields=name,cca2,capital,region,flags,population";
 
@@ -23,11 +25,10 @@ const fetchCountries = async () => {
      }
    }
 
-  console.log(countries, "countries");
-
   return (
       <div className="App">
-        <h1>Country App</h1>
+        <SearchBar />
+        <CountryList countries={countries} />
       </div>
   )
 }
