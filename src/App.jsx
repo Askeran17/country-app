@@ -42,9 +42,12 @@ const fetchCountries = async () => {
 
   const getCountryByRegion = async (regionName) => {
     try {
-      setRegion(regionName || 'all');
-      if (regionName === "all") return fetchCountries();
-  const response = await fetch(`${API_URL}/region/${regionName}?fields=name,cca2,capital,region,flags,population`);
+      const slug = (regionName || 'all').toLowerCase();
+      setRegion(slug);
+      if (slug === 'all') return fetchCountries();
+      // Handle antarctica alias
+      const apiSlug = slug === 'antarctica' ? 'antarctic' : slug;
+      const response = await fetch(`${API_URL}/region/${apiSlug}?fields=name,cca2,capital,region,flags,population`);
       const data = await response.json();
       setCountries(data);
     } catch (error) {
@@ -53,7 +56,9 @@ const fetchCountries = async () => {
   };
 
   const handleSortChange = (e) => {
-    setSortOrder(e.target.value);
+    // support both native select event and custom event-like object
+    const next = e?.target?.value ?? e;
+    setSortOrder(next);
   };
 
   return (
