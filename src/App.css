@@ -1,0 +1,9 @@
+.App {
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 20px;
+  background: url("./assets/home-background.webp") no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+  color: white;
+}
