@@ -2,6 +2,8 @@
   margin-bottom: 20px;
   display: flex;
   justify-content: center;
+  position: relative;
+  z-index: 10000; /* above dropdown menus */
 }
 
 .search-bar input {
@@ -10,6 +12,7 @@
   border-radius: 5px;
   width: 200px;
   transition: width 0.3s ease;
+  background: #fff;
 }
 
 .search-bar input:focus {

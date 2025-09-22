@@ -20,13 +20,13 @@ function FilterCountry({ value, onselect }) {
 
   // Close on outside click
   useEffect(() => {
-    function handleDocClick(e) {
+    function handleDocPointerUp(e) {
       if (!open) return;
       if (btnRef.current?.contains(e.target) || menuRef.current?.contains(e.target)) return;
       setOpen(false);
     }
-    document.addEventListener('pointerdown', handleDocClick);
-    return () => document.removeEventListener('pointerdown', handleDocClick);
+    document.addEventListener('pointerup', handleDocPointerUp);
+    return () => document.removeEventListener('pointerup', handleDocPointerUp);
   }, [open]);
 
   const onButtonKeyDown = (e) => {
