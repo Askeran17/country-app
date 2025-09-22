@@ -34,9 +34,9 @@ function SortDropDown({ sortOrder, onSortChange }) {
   };
 
   const selectValue = (value) => {
+    setOpen(false);
     // keep App.jsx handler API (expects event-like object)
     onSortChange?.({ target: { value } });
-    setOpen(false);
   };
 
   return (
@@ -46,7 +46,7 @@ function SortDropDown({ sortOrder, onSortChange }) {
         className="dropdown__control"
         aria-haspopup="listbox"
         aria-expanded={open}
-        onPointerDown={(e) => { e.preventDefault(); setOpen(v => !v); }}
+        onClick={() => setOpen(v => !v)}
         onKeyDown={onButtonKeyDown}
         ref={btnRef}
       >
@@ -68,6 +68,13 @@ function SortDropDown({ sortOrder, onSortChange }) {
               e.stopPropagation();
             }
           }}
+          onPointerUpCapture={(e) => {
+            if (e.nativeEvent && typeof e.nativeEvent.stopPropagation === 'function') {
+              e.nativeEvent.stopPropagation();
+            } else {
+              e.stopPropagation();
+            }
+          }}
         >
           {options.map(opt => (
             <li
@@ -75,7 +82,7 @@ function SortDropDown({ sortOrder, onSortChange }) {
               role="option"
               aria-selected={opt.value === sortOrder}
               className={`dropdown__option${opt.value === sortOrder ? ' is-selected' : ''}`}
-              onPointerUp={(e) => { e.preventDefault(); selectValue(opt.value); }}
+              onClick={() => selectValue(opt.value)}
               onKeyDown={(e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                   e.preventDefault();

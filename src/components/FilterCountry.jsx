@@ -39,8 +39,8 @@ function FilterCountry({ value, onselect }) {
   };
 
   const selectValue = (v) => {
-    onselect?.(v);
     setOpen(false);
+    onselect?.(v);
   };
 
   return (
@@ -50,7 +50,7 @@ function FilterCountry({ value, onselect }) {
         className="dropdown__control"
         aria-haspopup="listbox"
         aria-expanded={open}
-        onPointerDown={(e) => { e.preventDefault(); setOpen(v => !v); }}
+        onClick={() => setOpen(v => !v)}
         onKeyDown={onButtonKeyDown}
         ref={btnRef}
       >
@@ -71,6 +71,13 @@ function FilterCountry({ value, onselect }) {
               e.stopPropagation();
             }
           }}
+          onPointerUpCapture={(e) => {
+            if (e.nativeEvent && typeof e.nativeEvent.stopPropagation === 'function') {
+              e.nativeEvent.stopPropagation();
+            } else {
+              e.stopPropagation();
+            }
+          }}
         >
           {continents.map((c) => (
             <li
@@ -78,7 +85,7 @@ function FilterCountry({ value, onselect }) {
               role="option"
               aria-selected={c.value === current.value}
               className={`dropdown__option${c.value === current.value ? ' is-selected' : ''}`}
-              onPointerUp={(e) => { e.preventDefault(); selectValue(c.value); }}
+              onClick={() => selectValue(c.value)}
               onKeyDown={(e) => {
                 if (e.key === 'Enter' || e.key === ' ') {
                   e.preventDefault();
