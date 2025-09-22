@@ -1,14 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-/**
- * CustomSelect
- * Props:
- * - options: Array<{ value: string, label: string }>
- * - value: string | undefined
- * - onChange: (value: string) => void
- * - placeholder?: string
- * - className?: string
- */
 export default function CustomSelect({ options, value, onChange, placeholder = 'Select…', className = '' }) {
   const [open, setOpen] = useState(false);
   const [highlightIndex, setHighlightIndex] = useState(-1);

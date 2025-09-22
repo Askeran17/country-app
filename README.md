@@ -2,6 +2,10 @@
 
 Browse countries from around the world, search by name, filter by region, and sort alphabetically. The app uses the REST Countries v3.1 API and is built with React + Vite.
 
+## Live demo
+
+Deployed on Netlify: https://country-app-mikhail.netlify.app/
+
 ## Features
 
 - Fetches countries from REST Countries (v3.1) with a lean `fields` query
@@ -11,6 +15,13 @@ Browse countries from around the world, search by name, filter by region, and so
 - Country cards show flag, name, capital, region, and population
 - Custom‑styled dropdowns for a consistent look across browsers
 - Simple, responsive layout
+
+## Sorting controls
+
+The app supports ascending (A→Z) and descending (Z→A) sorting by country name.
+
+![Ascending](src/assets/ascending.png "Ascending")
+![Descending](src/assets/descending.png "Descending")
 
 ## Tech stack
 
@@ -58,17 +69,6 @@ npm run lint
 - Regions (slugs) expected by the API: `africa`, `americas`, `asia`, `europe`, `oceania`, `antarctic`.
   - Note: Antarctic is `antarctic` (not `antarctica`).
 - The app requests specific fields to reduce payload size and avoid 400 errors that can occur when omitting `fields`.
-
-## Accessibility
-
-The custom dropdown (`CustomSelect`) supports keyboard navigation (Arrow Up/Down, Enter/Space, Esc) and closes on outside click.
-
-## Roadmap / ideas
-
-- Persist user preferences (region, sort) in the URL or local storage
-- Country details page (routing)
-- Pagination or virtualized lists for performance
-- Tests (unit/integration)
 
 ## Acknowledgements
 
