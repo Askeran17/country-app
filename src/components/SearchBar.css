@@ -10,6 +10,8 @@
   border-radius: 5px;
   border: 1px solid #ccc;
   transition: width 0.3s ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .search-bar input:focus {

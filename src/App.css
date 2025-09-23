@@ -70,6 +70,9 @@ select:focus {
   font-family: inherit;
   font-size: inherit;
   box-sizing: border-box;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 .SelectTrigger:hover { filter: brightness(1.06); }
 .SelectTrigger:focus-visible { outline: 2px solid rgba(255,255,255,0.35); outline-offset: 2px; }
@@ -111,6 +114,12 @@ select:focus {
 
 /* Responsive adjustments */
 @media (max-width: 600px) {
+  .App {
+    /* Avoid transform-based animation on initial load to prevent iOS tap/focus glitches */
+    animation: none;
+    /* Avoid background-attachment: fixed on iOS which can interfere with hit testing */
+    background-attachment: scroll;
+  }
   .SelectTrigger {
     min-width: 0;
     width: 100%;
