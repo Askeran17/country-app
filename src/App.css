@@ -16,8 +16,8 @@
   gap: 20px;
 }
 
-.select {
-  padding: 10px 25px;
+select {
+  padding: 20px 25px;
   background-color: hsl(209,23%,22%);
   margin-bottom: 50px;
   border: none;
@@ -25,13 +25,14 @@
   border-radius: 5px;
   color: white;
   cursor: pointer;
+  
 }
 
-.select:hover {
+select:hover {
   filter: brightness(1.06);
 }
 
-.select:focus {
+select:focus {
   outline: 2px solid rgba(255,255,255,0.35);
   outline-offset: 2px;
 }
