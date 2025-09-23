@@ -63,6 +63,7 @@ npm run lint
 
 ## API notes (REST Countries v3.1)
 
+- Data from REST Countries: https://restcountries.com
 - Base: `https://restcountries.com/v3.1`
 - Endpoints used:
   - `GET /all?fields=name,cca2,capital,region,flags,population`
@@ -126,11 +127,6 @@ Troubleshooting tips:
 Related logic:
 
 - Region split for Americas (North/South) is handled in `src/App.jsx` by switching to the `/subregion/{North|South America}` endpoint. This is separate from Radix but affects the Filter dropdown options.
-
-
-## Acknowledgements
-
-- Data from REST Countries: https://restcountries.com
 
 ## License
 
