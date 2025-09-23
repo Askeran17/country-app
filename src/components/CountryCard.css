@@ -65,3 +65,13 @@
         opacity: 1;
     }
 }
+
+@media (max-width: 600px) {
+  .country-card {
+    /* Avoid heavy animations during initial interactions on mobile */
+    transform: none;
+    transition: none;
+    opacity: 1;
+    animation: none;
+  }
+}

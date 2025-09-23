@@ -15,7 +15,10 @@ function SortDropDown({ sortOrder = 'asc', onSortChange }) {
 
   return (
     <Select.Root value={sortOrder} onValueChange={handleChange}>
-      <Select.Trigger className="SelectTrigger" aria-label="Sort order">
+      <Select.Trigger
+        className="SelectTrigger"
+        aria-label="Sort order"
+      >
         <Select.Value />
         <Select.Icon className="SelectIcon">
           <ChevronDownIcon />

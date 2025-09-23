@@ -19,7 +19,10 @@ function FilterCountry({ value = 'all', onselect }) {
 
   return (
     <Select.Root value={value} onValueChange={handleChange}>
-      <Select.Trigger className="SelectTrigger" aria-label="Region">
+      <Select.Trigger
+        className="SelectTrigger"
+        aria-label="Region"
+      >
         <Select.Value>{selected.label}</Select.Value>
         <Select.Icon className="SelectIcon">
           <ChevronDownIcon />
