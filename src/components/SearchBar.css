@@ -12,11 +12,23 @@
   transition: width 0.3s ease;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
+  font-size: 16px; /* prevent iOS zoom */
 }
 
 .search-bar input:focus {
   outline: none;
   width: 250px;
   border-color: #007BFF;
+}
+
+@media (max-width: 600px) {
+  .search-bar input {
+    /* avoid width change on focus to prevent reflow stealing taps on iOS */
+    transition: none;
+    width: 100%;
+  }
+  .search-bar input:focus {
+    width: 100%;
+  }
 }
 
