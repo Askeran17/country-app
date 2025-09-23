@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react'
 import './App.css'
+import { useEffect, useState } from 'react'
 import CountryList from './components/CountryList.jsx'
 import SearchBar from './components/SearchBar.jsx'
 import FilterCountry from './components/FilterCountry.jsx'
@@ -11,7 +11,6 @@ function App() {
 const [countries, setCountries] = useState([]);
 const [searchTerm, setSearchTerm] = useState("");
 const [sortOrder, setSortOrder] = useState("asc");
-const [region, setRegion] = useState("all");
 
 
  useEffect(() => {
@@ -31,41 +30,36 @@ const fetchCountries = async () => {
    }
 
 
-  const filterCountries = countries.filter(country => {
-    return country.name.common.toLowerCase().includes(searchTerm.toLowerCase());
-  })
+  const filterCountries = countries.filter((country) =>
+     country.name.common.toLowerCase().includes(searchTerm.toLowerCase())
+  )
   .sort((a, b) => {
-    return sortOrder === "asc"
+   return sortOrder === "asc"
       ? a.name.common.localeCompare(b.name.common)
       : b.name.common.localeCompare(a.name.common);
   });
 
   const getCountryByRegion = async (regionName) => {
     try {
-      const slug = (regionName || 'all').toLowerCase();
-      setRegion(slug);
-      if (slug === 'all') return fetchCountries();
-      // Handle antarctica alias
-      const apiSlug = slug === 'antarctica' ? 'antarctic' : slug;
-      const response = await fetch(`${API_URL}/region/${apiSlug}?fields=name,cca2,capital,region,flags,population`);
-      const data = await response.json();
+      if (regionName === "all") return fetchCountries();
+      const resp = await fetch(`${API_URL}/region/${regionName}?fields=name,cca2,capital,region,flags,population`);
+      const data = await resp.json();
       setCountries(data);
     } catch (error) {
       console.log(error);
     }
   };
 
+
   const handleSortChange = (e) => {
-    // support both native select event and custom event-like object
-    const next = e?.target?.value ?? e;
-    setSortOrder(next);
-  };
+    setSortOrder(e.target.value);
+  }
 
   return (
       <div className="App">
         <SearchBar setSearchTerm={setSearchTerm} />
         <div className='sort-filter'>
-          <FilterCountry value={region} onselect={getCountryByRegion} />
+          <FilterCountry onselect={getCountryByRegion} />
           <SortDropDown sortOrder={sortOrder} onSortChange={handleSortChange} />
         </div>
         <CountryList countries={filterCountries} />

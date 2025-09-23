@@ -7,10 +7,6 @@ function SearchBar({ setSearchTerm }) {
       <input
         type='text'
         placeholder='Search for a country...'
-        inputMode='text'
-        autoComplete='off'
-        autoCorrect='off'
-        spellCheck={false}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
     </div>

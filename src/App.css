@@ -6,6 +6,7 @@
   background-size: cover;
   min-height: 100vh;
   color: white;
+  animation: slideIn 0.5s ease-out;
 }
 
 .sort-filter {
@@ -13,30 +14,17 @@
   align-items: center;
   justify-content: center;
   gap: 20px;
-  position: relative;
 }
 
 .select {
   padding: 10px 25px;
   background-color: hsl(209,23%,22%);
   margin-bottom: 50px;
-  border: 1px solid transparent;
+  border: none;
   outline: none;
   border-radius: 5px;
   color: white;
   cursor: pointer;
-  width: 220px;
-  line-height: 1.2;
-  /* Ensure custom styling applies across browsers */
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  /* Simple chevron using inline SVG */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 20 20'%3E%3Cpath d='M5.5 7.5l4.5 4 4.5-4' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 12px 12px;
-  padding-right: 36px; /* space for chevron */
 }
 
 .select:hover {
@@ -48,105 +36,15 @@
   outline-offset: 2px;
 }
 
-.select:disabled {
-  opacity: 0.65;
-  cursor: not-allowed;
-}
-
-/* Optional: some browsers honor option color */
-select.select option {
-  color: #fff;
-  background-color: hsl(209, 23%, 22%);
-}
-/* Hover/active state (supported in Chromium/Edge; limited in Safari/iOS) */
-select.select option:hover {
-  background-color: hsl(209, 23%, 28%);
-}
-select.select option:checked {
-  background-color: hsl(209, 23%, 34%);
-}
-
-/* Firefox-specific improvements */
-@-moz-document url-prefix() {
-  .select {
-    background-color: hsl(209,23%,22%) !important;
-    color: #fff !important;
+@keyframes slideIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
   }
-  select.select option {
-    color: #fff !important;
-    background-color: hsl(209, 23%, 22%) !important;
-  }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
-/* ==============================
-   Custom Dropdown (stylable)
-   Used by FilterCountry & SortDropDown
-   ============================== */
-.dropdown {
-  position: relative;
-  display: inline-block;
-  margin-bottom: 50px; /* move spacing to container to prevent shift when menu opens */
-  width: 220px; /* match control width so menu and control align */
-}
 
-.dropdown__control {
-  padding: 10px 36px 10px 12px;
-  background-color: hsl(209,23%,22%);
-  border: 1px solid transparent;
-  border-radius: 5px;
-  color: #fff;
-  cursor: pointer;
-  width: 100%;
-  line-height: 1.2;
-  text-align: left;
-}
-.dropdown__control:hover {
-  filter: brightness(1.06);
-}
-.dropdown__control:focus-visible {
-  outline: 2px solid rgba(255,255,255,0.35);
-  outline-offset: 2px;
-}
-.dropdown__chevron {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none;
-}
-
-.dropdown__menu {
-  position: absolute;
-  left: 0;
-  top: calc(100% + 6px);
-  background-color: hsl(209,23%,22%);
-  border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 8px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-  padding: 6px;
-  list-style: none;
-  margin: 0;
-  z-index: 9999; /* ensure overlays above cards */
-  max-height: 260px;
-  overflow: auto;
-  width: 100%;
-}
-.dropdown__option {
-  padding: 10px 12px;
-  border-radius: 6px;
-  color: #fff;
-  cursor: pointer;
-}
-.dropdown__option:hover,
-.dropdown__option:focus {
-  background-color: hsl(209, 23%, 28%);
-  outline: none;
-}
-.dropdown__option.is-selected {
-  background-color: hsl(209, 23%, 34%);
-}
-
-/* Compact variant for sort control to reduce width if needed */
-.dropdown[data-variant="compact"] .dropdown__control {
-  width: 100%;
-}

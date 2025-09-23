@@ -2,21 +2,19 @@
   margin-bottom: 20px;
   display: flex;
   justify-content: center;
-  position: relative;
-  z-index: 10000; /* above dropdown menus */
 }
 
 .search-bar input {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
   width: 200px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
   transition: width 0.3s ease;
-  background: #fff;
 }
 
 .search-bar input:focus {
   outline: none;
   width: 250px;
-  
+  border-color: #007BFF;
 }
+
