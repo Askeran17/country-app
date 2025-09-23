@@ -11,6 +11,7 @@ function App() {
 const [countries, setCountries] = useState([]);
 const [searchTerm, setSearchTerm] = useState("");
 const [sortOrder, setSortOrder] = useState("asc");
+const [region, setRegion] = useState('all');
 
 
  useEffect(() => {
@@ -41,8 +42,17 @@ const fetchCountries = async () => {
 
   const getCountryByRegion = async (regionName) => {
     try {
-      if (regionName === "all") return fetchCountries();
-      const resp = await fetch(`${API_URL}/region/${regionName}?fields=name,cca2,capital,region,flags,population`);
+      const val = (regionName || 'all').toLowerCase();
+      setRegion(val);
+      if (val === "all") return fetchCountries();
+      if (val === 'north-america' || val === 'south-america') {
+        const sub = val === 'north-america' ? 'North America' : 'South America';
+        const resp = await fetch(`${API_URL}/subregion/${encodeURIComponent(sub)}?fields=name,cca2,capital,region,flags,population`);
+        const data = await resp.json();
+        setCountries(data);
+        return;
+      }
+      const resp = await fetch(`${API_URL}/region/${val}?fields=name,cca2,capital,region,flags,population`);
       const data = await resp.json();
       setCountries(data);
     } catch (error) {
@@ -59,7 +69,7 @@ const fetchCountries = async () => {
       <div className="App">
         <SearchBar setSearchTerm={setSearchTerm} />
         <div className='sort-filter'>
-          <FilterCountry onselect={getCountryByRegion} />
+          <FilterCountry value={region} onselect={getCountryByRegion} />
           <SortDropDown sortOrder={sortOrder} onSortChange={handleSortChange} />
         </div>
         <CountryList countries={filterCountries} />
